@@ -24,6 +24,9 @@ gem 'jquery-rails'
 # Use HAML instead of ERB
 gem 'haml-rails'
 
+# Debugger
+gem 'debugger'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 

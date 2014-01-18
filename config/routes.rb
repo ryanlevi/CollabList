@@ -1,7 +1,8 @@
 CollabList::Application.routes.draw do
   get "list/index"
   get 'list/view/:id', to: 'list#view'
-  get 'view/:id', to: 'list#view'
+  get ':id', to: 'list#view'
+  get 'delete_item/:id', to: 'list#delete_item'
   delete 'list/destroy/:id', to: 'list#destroy', as: 'destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.

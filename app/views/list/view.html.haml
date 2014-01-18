@@ -1,2 +1,18 @@
-%h1 List#view
-%p Find me in app/views/list/view.html.haml
+/ - if @list.name
+- if true
+  %h1= @list.name
+  %form
+    #inputField{style: "display:none;"}
+      %input#textInput{type: "text", value: @list.name, name: "new_name"}
+      %button(type="submit") Change Name
+  %a{href: "#", onclick: "document.getElementById('inputField').style.display = 'block';"} Edit
+- else
+  %input
+- @list_items.each do |item|
+  %li
+    = item.item
+    %a{href: "/delete_item/#{item.id}"} x
+%p
+  %form
+    %input(name="new_item")
+    %button(type="submit") Add
