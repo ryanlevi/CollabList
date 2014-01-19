@@ -10,12 +10,21 @@
   %form
     #inputField{style: "display:block;"}
       %input#textInput{type: "text", value: @list.name, name: "new_name"}
-      %button(type="submit") Add Name
+      %button(type="submit") Name This List
 - @list_items.each do |item|
   %li
-    = item.item
+    - if item.item =~ /youtube.com\/\w*[?][v][=]\w*/ or item.item =~ /youtu.be\/\w*/
+      - youtube = /[v][=]\w*/.match(item.item).to_s[2..-1] if item.item =~ /youtube.com\/\w*[?][v][=]\w*/
+      - youtube = /youtu.be\/\w*/.match(item.item).to_s[9..-1] if item.item =~ /youtu.be\/\w*/
+      %object{height: "150", width: "200"}
+        %param{name: "movie", value: "//www.youtube.com/v/#{youtube}?version=3&hl=en_US&rel=0"}/
+        %param{name: "allowFullScreen", value: "true"}/
+        %param{name: "allowscriptaccess", value: "always"}/
+        %embed{allowfullscreen: "true", allowscriptaccess: "always", height: "150", src: "//www.youtube.com/v/#{youtube}?version=3&hl=en_US&rel=0", type: "application/x-shockwave-flash", width: "200"}
+    - else
+      = item.item
     %a{href: "/delete_item/#{item.id}"} x
 %p
   %form
     %input(name="new_item")
-    %button(type="submit") Add
+    %button(type="submit") Add Item
