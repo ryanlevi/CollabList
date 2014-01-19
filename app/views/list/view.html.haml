@@ -1,13 +1,16 @@
-/ - if @list.name
-- if true
-  %h1= @list.name
+- if @list.name
+  #title
+    %h3= @list.name
   %form
     #inputField{style: "display:none;"}
       %input#textInput{type: "text", value: @list.name, name: "new_name"}
       %button(type="submit") Change Name
-  %a{href: "#", onclick: "document.getElementById('inputField').style.display = 'block';"} Edit
+  %a{href: "#", onclick: "document.getElementById('inputField').style.display = 'block'; "} Edit
 - else
-  %input
+  %form
+    #inputField{style: "display:block;"}
+      %input#textInput{type: "text", value: @list.name, name: "new_name"}
+      %button(type="submit") Add Name
 - @list_items.each do |item|
   %li
     = item.item
