@@ -7,7 +7,10 @@ gem 'rails', '4.0.0'
 gem 'sqlite3'
 
 # Use posgres for production
-gem 'pg'
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
