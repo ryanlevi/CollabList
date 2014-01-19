@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: [:development, :test]
 
 # Use posgres for production
 group :production do
@@ -30,9 +30,6 @@ gem 'jquery-rails'
 # Use HAML instead of ERB
 gem 'haml-rails'
 
-# Debugger
-gem 'debugger'
-
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
@@ -54,4 +51,6 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'debugger', group: [:development, :test]
+
+ruby "2.0.0"
