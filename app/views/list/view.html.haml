@@ -11,7 +11,14 @@
     #inputField{style: "display:block;"}
       %input#textInput{type: "text", value: @list.name, name: "new_name"}
       %button(type="submit") Name This List
-- @list_items.each do |item|
+%p
+  %form
+    %input(name="new_item")
+    %button(type="submit") Add Item
+%p
+  %form{action: "/delete_list/#{@list.id}", method: "put"}
+    %input(type="submit" value="Delete List?")
+- @list_items.reverse.each do |item|
   %li
     - if item.item =~ /youtube.com\/\w*[?][v][=]\w*/ or item.item =~ /youtu.be\/\w*/
       - youtube = /[v][=]\w*/.match(item.item).to_s[2..-1] if item.item =~ /youtube.com\/\w*[?][v][=]\w*/
@@ -24,7 +31,3 @@
     - else
       = item.item
     %a{href: "/delete_item/#{item.id}"} x
-%p
-  %form
-    %input(name="new_item")
-    %button(type="submit") Add Item

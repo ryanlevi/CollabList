@@ -5,7 +5,17 @@ class ListController < ApplicationController
   end
 
   def view
-    @list = List.find(params[:id])
+    if List.find_by_id(params[:id])
+      @list = List.find(params[:id])
+    else
+      List.all.each do |list|
+        if ListItem.where(:list_id => list.id).to_a.length == 0
+          list.destroy
+        end
+      end
+      @list = List.create
+      redirect_to "/#{@list.id}"
+    end
     if params[:new_item]
       @list_item = ListItem.new
       @list_item.list_id = @list.id
@@ -26,5 +36,12 @@ class ListController < ApplicationController
     @list = List.find(@list_item.list_id)
     @list_item.destroy
     redirect_to "/#{@list.id}"
+  end
+
+  def delete_list
+    @list_id = params[:id]
+    @list = List.find(@list_id)
+    @list.destroy
+    redirect_to "/"
   end
 end
